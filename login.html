@@ -27,13 +27,13 @@
             <form>
               
                 <div class="container">
-                  <label for="uname"><b>Username</b></label>
-                  <input type="text" placeholder="Enter Username" name="uname">
+                  <label for="login-username"><b>Username</b></label>
+                  <input type="text" placeholder="Enter Username" id="login-username">
               
                   <label for="psw"><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="psw">
+                  <input type="password" placeholder="Enter Password" id="psw">
               
-                  <button type="submit">Login</button>
+                  <button onclick="login()">Login</button>
                   <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                   </label>
@@ -48,6 +48,20 @@
         </div>
       </div>
       
+      <script>
+      function login() {
+          const username = document.getElementById('login-username').value;
+          const password = document.getElementById('psw').value;
+          const storedPassword = localStorage.getItem(username);
+
+          if (storedPassword === password) {
+        	  alert('Login succesful');
+        	  window.location.href = 'canvas.html';
+          } else {
+              alert('Invalid username or password.');
+          }
+      }
+  </script>
       
       <div class="footer">
         <p>© 2020 Larsen & Toubro Infotech Limited</p>

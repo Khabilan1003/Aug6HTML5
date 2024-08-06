@@ -7,6 +7,9 @@
   
   }
   
+  .valid { color: green; }
+  .invalid { color: red; }
+  
   body {
     font-family: Arial;
     padding: 10px;

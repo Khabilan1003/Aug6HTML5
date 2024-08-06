@@ -26,12 +26,17 @@
             <h2 style="text-align: center;">Register to explore amazing career opportunities</h2>
             <form>
                 <div class="container">
-                  <label for="uname"><b>Username</b></label>
-                  <input type="text" placeholder="Enter Username" name="uname">
+                  <label for=id="register-username"><b>Username</b></label>
+                  <input type="text" id="register-username" placeholder="Enter Username" >
               
-                  <label for="psw"><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="psw">
-              
+                  <label for="register-password"><b>Password</b></label>
+                  <input type="password" placeholder="Enter Password" id="register-password" oninput="checkPasswordStrength('register-password', 'register-password-strength')">
+              	  <p id="register-password-strength"></p>
+              	  
+              	  <label for="register-confirm-password">Confirm Password:</label>
+        		  <input type="password" id="register-confirm-password" oninput="checkPasswordMatch('register-password', 'register-confirm-password', 'register-password-match')"><br>
+        		  <p id="register-password-match"></p>
+        
                   <label for="email"><b>Email Address</b></label>
                   <input type="email" placeholder="Enter Email Address" name="email">
               
@@ -41,13 +46,84 @@
                   <label for="mobile"><b>Mobile No.</b></label>
                   <input type="tel" placeholder="Enter Mobile Number" name="mobile">
 
-                  <button type="submit">Register</button>
+                  <button type="submit" onclick='register()'>Register</button>
                 </div>
               </form>
           </div>
         </div>
       </div>
       
+      <script>
+        // Use localStorage for storing credentials in this example
+        // Note: This is not secure for real applications
+
+        function checkPasswordStrength(passwordId, strengthId) {
+            const password = document.getElementById(passwordId).value;
+            const strength = document.getElementById(strengthId);
+            const regex = {
+                capital : /[A-Z]/,
+                small : /[a-z]/,
+                special : /[!@#$%^&*(),.?":{}|<>]/,
+                number : /[0-9]/,
+                length : /.{8,}/
+            };
+            let valid = true;
+            let message = 'Password must include: ';
+            if (!regex.capital.test(password)) {
+                message += 'one capital letter, ';
+                valid = false;
+            }
+            if (!regex.small.test(password)) {
+                message += 'one small letter, ';
+                valid = false;
+            }
+            if (!regex.special.test(password)) {
+                message += 'one special character, ';
+                valid = false;
+            }
+            if (!regex.number.test(password)) {
+                message += 'one number, ';
+                valid = false;
+            }
+            if (!regex.length.test(password)) {
+                message += 'minimum 8 characters.';
+                valid = false;
+            }
+            if (valid) {
+                strength.textContent = 'Password is strong.';
+                strength.className = 'valid';
+            } else {
+                strength.textContent = message;
+                strength.className = 'invalid';
+            }
+        }
+
+        function checkPasswordMatch(passwordId, confirmPasswordId, matchId) {
+            const password = document.getElementById(passwordId).value;
+            const confirmPassword = document.getElementById(confirmPasswordId).value;
+            const match = document.getElementById(matchId);
+            if (password === confirmPassword) {
+                match.textContent = 'Passwords match.';
+                match.className = 'valid';
+            } else {
+                match.textContent = 'Passwords do not match.';
+                match.className = 'invalid';
+            }
+        }
+
+        function register() {
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+
+            if (password === confirmPassword) {
+                localStorage.setItem(username, password); // Store username and password in localStorage
+                alert('Registration successful!');
+            } else {
+                alert('Passwords do not match.');
+            }
+        }
+      </script>
       
       <div class="footer">
         <p>© 2020 Larsen & Toubro Infotech Limited</p>
