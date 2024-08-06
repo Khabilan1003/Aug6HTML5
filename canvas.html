@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehicle Loan Bar Chart</title>
     <style>
-        body {
+        .chat-container-1 {
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -21,14 +21,49 @@
             border: 1px solid #ccc;
             background-color: #fff;
         }
+        .geolocation-container {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .title {
+            font-weight: bold;
+            size: 30px;
+            text-align: center;
+        }
+
+        .geolocation-container iframe {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div class="chart-container">
-        <h1>Loan Options</h1>
-        <canvas id="loanChart" width="600" height="400"></canvas>
-        <p>Interest Rates (%)</p>
+    <div class="chart-container-1">
+        <div class="chart-container">
+            <h1>Loan Options</h1>
+            <canvas id="loanChart" width="600" height="400"></canvas>
+            <p>Interest Rates (%)</p>
+        </div>
+        
     </div>
+    <br />
+
+    <div class="geolocation-container">
+        <h2 class="title">Find Us At</h2>
+        
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15011.950721589932!2d72.820125!3d19.076090!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7d8599c27e5%3A0x82508c85c5d7d5b0!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1637254783398!5m2!1sen!2sin"
+          width="600"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          >
+        </iframe>
+    </div>
+ 
 
     <script>
         const canvas = document.getElementById('loanChart');
