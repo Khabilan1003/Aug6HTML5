@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Loan Bar Chart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .chart-container {
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <h1>Loan Options</h1>
+        <canvas id="loanChart" width="600" height="400"></canvas>
+        <p>Interest Rates (%)</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('loanChart');
+        const ctx = canvas.getContext('2d');
+
+        const data = {
+            labels: ['Standard Loan', 'Premium Loan', 'VIP Loan'],
+            values: [5.2, 3.8, 2.5]
+        };
+
+        const colors = ['#ff9999', '#66b3ff', '#99ff99'];
+
+        function drawChart() {
+            const width = canvas.width;
+            const height = canvas.height;
+            const barWidth = width / (data.values.length * 2);
+
+            ctx.clearRect(0, 0, width, height);
+
+            data.values.forEach((value, index) => {
+                const x = barWidth * (index * 2 + 1);
+                const barHeight = height * (value / 10); // Assuming the highest value is 10
+                const y = height - barHeight;
+
+                ctx.fillStyle = colors[index];
+                ctx.fillRect(x, y, barWidth, barHeight);
+
+                // Draw label
+                ctx.fillStyle = '#000';
+                ctx.textAlign = 'center';
+                ctx.font = '16px Arial';
+                ctx.fillText(data.labels[index], x + barWidth / 2, height - 10);
+                ctx.fillText(value + '%', x + barWidth / 2, y - 10);
+            });
+        }
+
+        drawChart();
+    </script>
+</body>
+</html>
