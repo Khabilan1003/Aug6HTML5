@@ -4,7 +4,7 @@
     <title>VLoan - The Vehicle Loan Company</title>
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <script src='main.js' defer></script> <!-- Ensure JS is loaded after HTML -->
 </head>
 <body>
     <div class="header">
@@ -18,39 +18,54 @@
         <li><a href="login.html">Login</a></li>
         <li><img src="images/lti.jpg" style="float: right; padding-right: 20px; height:50px"></li>
         </ul>
-      </div>
+    </div>
       
-      <div class="row">
+    <div class="row">
         <div class="main">
           <div class="card">
             <h2 style="text-align: center;">Login to a world of opportunities!</h2>
-            <form>
+            <form onsubmit="return login();">
+              <div class="container">
+                <label for="login-username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" id="login-username">
               
-                <div class="container">
-                  <label for="uname"><b>Username</b></label>
-                  <input type="text" placeholder="Enter Username" name="uname">
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" id="psw">
               
-                  <label for="psw"><b>Password</b></label>
-                  <input type="password" placeholder="Enter Password" name="psw">
+                <button type="submit">Login</button> <!-- Ensure the button is of type 'submit' to trigger form submission -->
+                <label>
+                  <input type="checkbox" checked="unchecked" name="remember"> Remember me
+                </label>
+              </div>
               
-                  <button type="button" onclick="window.location.href='canvas.html'">Login</button>
-    <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-                </div>
-              
-                <div class="container" style="background-color:#f1f1f1">
-                  <button type="button" class="cancelbtn">Cancel</button>
-                  <span class="psw">Forgot <a href="#">password?</a></span>
-                </div>
-              </form>
+              <div class="container" style="background-color:#f1f1f1">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+              </div>
+            </form>
           </div>
         </div>
-      </div>
+    </div>
       
+    <script>
+      function login() {
+          const username = document.getElementById('login-username').value;
+          const password = document.getElementById('psw').value;
+          const storedPassword = localStorage.getItem(username);
+
+          if (storedPassword === password) {
+              // Redirect to canvas.html
+              window.location.href = 'canvas.html'; // Use relative path
+              return false; // Prevent form submission
+          } else {
+              alert('Invalid username or password.');
+              return false; // Prevent form submission
+          }
+      }
+    </script>
       
-      <div class="footer">
-        <p>© 2024 VLoan - The Vehicle Loan Company</p>
-      </div>          
+    <div class="footer">
+      <p>© 2024 VLoan - The Vehicle Loan Company</p>
+    </div>  
 </body>
 </html>
