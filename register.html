@@ -33,12 +33,15 @@
                   <input type="password" placeholder="Enter Password" id="register-password" oninput="checkPasswordStrength('register-password', 'register-password-strength')">
               	  <p id="register-password-strength"></p>
               	  
-              	  <label for="register-confirm-password">Confirm Password:</label>
+              	  <label for="register-confirm-password"><b>Confirm Password:</b></label>
         		  <input type="password" id="register-confirm-password" oninput="checkPasswordMatch('register-password', 'register-confirm-password', 'register-password-match')"><br>
         		  <p id="register-password-match"></p>
         
                   <label for="email"><b>Email Address</b></label>
-                  <input type="email" placeholder="Enter Email Address" name="email">
+                  <input type="email" placeholder="Enter Email Address" name="email"><br><br>
+
+					<label for="dob"><b>Date of Birth:</b></label>
+        			<input type="date" id="dob" name="dob" placeholder="Enter Date of Birth"> <br><br>
               
                   <label for="city"><b>City</b></label>
                   <input type="text" placeholder="Enter City" name="city">
@@ -118,7 +121,8 @@
 
             if (password === confirmPassword) {
                 localStorage.setItem(username, password); // Store username and password in localStorage
-                alert('Registration successful!');
+                
+                window.location.href = 'login.html';
             } else {
                 alert('Passwords do not match.');
             }
